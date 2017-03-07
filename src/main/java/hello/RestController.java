@@ -65,24 +65,22 @@ public class RestController {
 			FileMetaData md = new FileMetaData();
 			md.setFileName("Text.txt");
 			md.setCreatedTime(new Date());
-			md = fds.save(md);
+			md = fds.save(md);//	@RequestMapping(value = "/documents", method = RequestMethod.GET)DONE
+//			public @ResponseBody List<FileMetaData> handleTest(HttpServletRequest req, HttpServletResponse res) {
+//			try {
+//				List<FileMetaData> sd = fds.allFiles();
+//				return sd;// document.getMetadata();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			return null;
+//		}
 			return md;// document.getMetadata();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
-//	@RequestMapping(value = "/documents", method = RequestMethod.GET)
-//	public @ResponseBody List<FileMetaData> handleTest(HttpServletRequest req, HttpServletResponse res) {
-//		try {
-//			List<FileMetaData> sd = fds.allFiles();
-//			return sd;// document.getMetadata();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
 
 	@RequestMapping(value = "/documents", method = RequestMethod.GET)
 	public HttpEntity<List<FileMetaData>> handleTest(
@@ -110,6 +108,11 @@ public class RestController {
 
 		InputStreamResource isr = new InputStreamResource(new FileInputStream(document));
 		return new ResponseEntity<InputStreamResource>(isr, respHeaders, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/metaData/{id}", method = RequestMethod.GET)
+	public FileMetaData getDocumentMetaData(@PathVariable long id) throws IOException {		
+		return fds.getFile(id);
 	}
 
 }
