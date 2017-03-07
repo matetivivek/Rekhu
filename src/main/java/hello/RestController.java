@@ -59,28 +59,7 @@ public class RestController {
 		return md;
 	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public @ResponseBody FileMetaData handle(HttpServletRequest req, HttpServletResponse res) {
-		try {
-			FileMetaData md = new FileMetaData();
-			md.setFileName("Text.txt");
-			md.setCreatedTime(new Date());
-			md = fds.save(md);//	@RequestMapping(value = "/documents", method = RequestMethod.GET)DONE
-//			public @ResponseBody List<FileMetaData> handleTest(HttpServletRequest req, HttpServletResponse res) {
-//			try {
-//				List<FileMetaData> sd = fds.allFiles();
-//				return sd;// document.getMetadata();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			return null;
-//		}
-			return md;// document.getMetadata();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+	
 
 	@RequestMapping(value = "/documents", method = RequestMethod.GET)
 	public HttpEntity<List<FileMetaData>> handleTest(
